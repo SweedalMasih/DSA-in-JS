@@ -85,6 +85,40 @@ class LinkedList {
       current = current.next;
     }
   }
+
+  // Method to get the data at a specific index in the linked list
+  get(index) {
+    if (index < 0 || !this.head) {
+      return undefined;
+    }
+
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      if (!current.next) {
+        return undefined;
+      }
+      current = current.next;
+    }
+
+    return current.data;
+  }
+
+  // Method to set the value at a specific index in the linked list
+  set(index, value) {
+    if (index < 0 || !this.head) {
+      return;
+    }
+
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      if (!current.next) {
+        return;
+      }
+      current = current.next;
+    }
+
+    current.data = value;
+  }
 }
 
 const linkedList = new LinkedList();
