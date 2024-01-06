@@ -1,0 +1,102 @@
+//this class is used to represent each element in the linked list
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+
+// this class is used to represent the linked list
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  // this method will be used to add a new node at the end of linked list.
+  push(data) {
+    const newNode = new Node(data);
+
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+
+    current.next = newNode;
+  }
+
+  pop() {
+    if (!this.head) {
+      return;
+    }
+
+    if (!this.head.next) {
+      this.head = null;
+      return;
+    }
+
+    let current = this.head;
+    let previous = null;
+    while (current.next) {
+      previous = current;
+      current = current.next;
+    }
+
+    previous.next = null;
+  }
+
+  shift() {
+    if (!this.head) {
+      return;
+    }
+
+    if (!this.head.next) {
+      this.head = null;
+      return;
+    }
+
+    this.head = this.head.next;
+  }
+
+  unshift(data) {
+    const newNode = new Node(data);
+
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  printElements() {
+    if (!this.head) {
+      return;
+    }
+
+    let current = this.head;
+    while (current) {
+      console.log(current.data);
+      current = current.next;
+    }
+  }
+}
+
+const linkedList = new LinkedList();
+
+linkedList.push(1);
+linkedList.push(2);
+linkedList.push(3);
+linkedList.push(4);
+linkedList.push(5);
+linkedList.printElements();
+linkedList.unshift(0);
+linkedList.shift();
+linkedList.shift();
+linkedList.shift();
+linkedList.shift();
