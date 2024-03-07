@@ -1,3 +1,8 @@
+// Online Javascript Editor for free
+// Write, Edit and Run your Javascript code using JS Online Compiler
+
+console.log("Try programiz.pro");
+
 class Node {
   constructor(data) {
     this.data = data;
@@ -43,12 +48,12 @@ class LinkedList {
     prev.next = null;
 
     /*
-      another way: without using prev
-      while(current.next.next) {
-          current = current.next;
-      }
-      current.next = null
-      */
+        another way: without using prev
+        while(current.next.next) {
+            current = current.next;
+        }
+        current.next = null
+        */
 
     // console.log(current, this.head)
 
@@ -93,6 +98,25 @@ class LinkedList {
       current = current.next;
     }
   }
+
+  getData(position) {
+    if (!this.head) {
+      return;
+    }
+
+    if (position === 0) {
+      return this.head.data;
+    }
+
+    let current = this.head;
+
+    for (let i = 0; i < position; i++) {
+      current = current.next;
+    }
+
+    console.log(current, current.data);
+    return current.data;
+  }
 }
 
 const myLL = new LinkedList();
@@ -110,3 +134,5 @@ console.log(myLL.unshift(-1));
 console.log(myLL.shift());
 
 console.log(myLL.printElements());
+
+console.log(myLL.getData(2));
