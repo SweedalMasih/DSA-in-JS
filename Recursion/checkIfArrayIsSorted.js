@@ -12,3 +12,4 @@ function checkIfArrayIsSorted(arr, idx) {
 
 console.log(checkIfArrayIsSorted([1, 2, 3, 7, 5], 0));
 console.log(checkIfArrayIsSorted([1, 2, 3, 4, 5, 10], 0));
+console.log(checkIfArrayIsSorted([1, 2, 3, 4, 5, 1], 0));
