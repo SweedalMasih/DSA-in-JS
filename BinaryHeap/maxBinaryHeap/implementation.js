@@ -1,3 +1,15 @@
+/*
+Max Binary Heap
+
+Each parent has at most two child nodes.
+The  value of each parent node is always greater than its child nodes.
+A Parent is always greater than the children but there are no guarantees between sibling nodes.
+A binary heap is as compact as possible. All the children of each node are as full as they can be and left children are filled out first.
+The root element will be at Array[0].
+For any child node at index n --> parent is at index (n-1)/ 2 (floor)
+For any index of an array n : Left child ---> 2n + 1    ,    Right child ---> 2n + 2
+*/
+
 class MaxBinaryHeap {
   constructor() {
     this.values = [];
