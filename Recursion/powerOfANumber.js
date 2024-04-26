@@ -5,3 +5,4 @@ function power(a, n) {
 }
 
 console.log(power(6, 3));
+// Output: 216

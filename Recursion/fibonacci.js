@@ -15,3 +15,4 @@ function fibonacci2(n) {
 }
 
 console.log(fibonacci2(7));
+// Output: 8

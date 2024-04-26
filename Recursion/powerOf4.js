@@ -5,3 +5,8 @@ var isPowerOfFour = function (n) {
 
   return isPowerOfFour(n / 4);
 };
+
+console.log(isPowerOfFour(16));
+// Output: true
+console.log(isPowerOfFour(5));
+// Output: false
