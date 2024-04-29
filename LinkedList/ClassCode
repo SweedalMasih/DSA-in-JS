@@ -80,10 +80,14 @@ class LinkedList {
     }
 
     let current = this.head;
+    let i = 0;
     while (current) {
-      console.log(current.data);
+      i++;
+      console.log(current.data, i, current.next);
       current = current.next;
     }
+
+    console.log({ current });
   }
 
   // Method to get the data at a specific index in the linked list
