@@ -66,6 +66,14 @@ class Graph {
 
     return this.adjacencyList;
   }
+
+  traverse() {
+    if (!this.adjacencyList) {
+      return "no node is present";
+    }
+
+    console.log(this.adjacencyList);
+  }
 }
 
 const myGraph = new Graph();
@@ -80,3 +88,5 @@ console.log(myGraph.addEdge(3, 1));
 
 // console.log(myGraph.removeEdge(1,2));
 console.log(myGraph.removeVertex(1));
+
+console.log(myGraph.traverse());
