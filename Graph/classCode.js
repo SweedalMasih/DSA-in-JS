@@ -67,12 +67,32 @@ class Graph {
     return this.adjacencyList;
   }
 
-  traverse() {
+  traverse(startNode) {
     if (!this.adjacencyList) {
       return "no node is present";
     }
-
     console.log(this.adjacencyList);
+
+    const queue = [startNode];
+    const nodes = [];
+    const visitedMap = new Map();
+
+    visitedMap.set(startNode, true);
+
+    console.log("initial", visitedMap, this.adjacencyList);
+    while (queue.length) {
+      const currVertex = queue.shift();
+      nodes.push(currVertex);
+
+      for (let connection of this.adjacencyList.get(currVertex)) {
+        console.log({ connection });
+        if (!visitedMap.has(connection)) {
+          visitedMap.set(connection, true);
+          queue.push(connection);
+        }
+      }
+    }
+    return nodes;
   }
 }
 
@@ -84,9 +104,9 @@ console.log(myGraph.addNode(3));
 console.log(myGraph.addEdge(1, 2));
 console.log(myGraph.addEdge(2, 3));
 console.log(myGraph.addEdge(3, 1));
-// console.log(myGraph.addEdge(4,1));
+// console.log(myGraph.addEdge(4, 1));
 
 // console.log(myGraph.removeEdge(1,2));
-console.log(myGraph.removeVertex(1));
+// console.log(myGraph.removeVertex(1));
 
-console.log(myGraph.traverse());
+console.log(myGraph.traverse(1));
