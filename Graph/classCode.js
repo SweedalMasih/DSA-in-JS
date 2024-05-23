@@ -67,7 +67,7 @@ class Graph {
     return this.adjacencyList;
   }
 
-  traverse(startNode) {
+  traverseBFS(startNode) {
     if (!this.adjacencyList) {
       return "no node is present";
     }
@@ -109,4 +109,4 @@ console.log(myGraph.addEdge(3, 1));
 // console.log(myGraph.removeEdge(1,2));
 // console.log(myGraph.removeVertex(1));
 
-console.log(myGraph.traverse(1));
+console.log(myGraph.traverseBFS(1));
