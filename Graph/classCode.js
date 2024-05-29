@@ -10,7 +10,7 @@ class Graph {
     return this.adjacencyList;
   }
 
-  addEdge(node1, node2) {
+  addEdge(node1, node2, weight) {
     const sourceNode = this.adjacencyList.get(node1);
     const destNode = this.adjacencyList.get(node2);
 
@@ -18,8 +18,8 @@ class Graph {
       return "one of the vertices is not present";
     }
 
-    sourceNode.push(node2);
-    destNode.push(node1);
+    sourceNode.push({ node2, weight });
+    destNode.push({ node1, weight });
 
     return this.adjacencyList;
   }
@@ -79,20 +79,45 @@ class Graph {
 
     visitedMap.set(startNode, true);
 
-    console.log("initial", visitedMap, this.adjacencyList);
+    console.log("initial", visitedMap);
     while (queue.length) {
       const currVertex = queue.shift();
       nodes.push(currVertex);
 
       for (let connection of this.adjacencyList.get(currVertex)) {
-        console.log({ connection });
-        if (!visitedMap.has(connection)) {
-          visitedMap.set(connection, true);
-          queue.push(connection);
+        const nextNode =
+          connection.node1 === currVertex ? connection.node2 : connection.node1;
+        if (nextNode !== undefined && !visitedMap.has(nextNode)) {
+          console.log("connection", { connection, nextNode, queue });
+          visitedMap.set(nextNode, true);
+          queue.push(nextNode);
         }
       }
     }
     return nodes;
+  }
+
+  dfsForGraphs(StartingVertex) {
+    let visitedNodesArray = [];
+    let trackofVisitedNodes = {};
+    let list = this.adjacencyList;
+
+    function traverse(vertex) {
+      if (!vertex) {
+        return null;
+      }
+      trackofVisitedNodes[vertex] = true;
+      visitedNodesArray.push(vertex);
+      list.get(vertex).forEach((connection) => {
+        const nextNode =
+          connection.node1 === vertex ? connection.node2 : connection.node1;
+        if (!trackofVisitedNodes[nextNode]) {
+          return traverse(nextNode);
+        }
+      });
+    }
+    traverse(StartingVertex);
+    return visitedNodesArray;
   }
 }
 
@@ -101,12 +126,13 @@ console.log(myGraph.addNode(1));
 console.log(myGraph.addNode(2));
 console.log(myGraph.addNode(3));
 // console.log(myGraph.addNode(4));
-console.log(myGraph.addEdge(1, 2));
-console.log(myGraph.addEdge(2, 3));
-console.log(myGraph.addEdge(3, 1));
+console.log(myGraph.addEdge(1, 2, 5));
+console.log(myGraph.addEdge(2, 3, 8));
+console.log(myGraph.addEdge(3, 1, 10));
 // console.log(myGraph.addEdge(4, 1));
 
 // console.log(myGraph.removeEdge(1,2));
 // console.log(myGraph.removeVertex(1));
 
 console.log(myGraph.traverseBFS(1));
+console.log(myGraph.dfsForGraphs(1));
