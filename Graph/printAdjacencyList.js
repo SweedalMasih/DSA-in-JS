@@ -8,9 +8,7 @@ class Solution {
     }
 
     // for (const edge of edges) {
-
     //     const [u,v] = edge;
-
     //     adjacencyList[u].push(v);
     //     adjacencyList[v].push(u);
     // }
