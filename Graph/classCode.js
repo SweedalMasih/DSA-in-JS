@@ -122,6 +122,7 @@ class Graph {
 }
 
 const myGraph = new Graph();
+/*
 console.log(myGraph.addNode(1));
 console.log(myGraph.addNode(2));
 console.log(myGraph.addNode(3));
@@ -136,3 +137,136 @@ console.log(myGraph.addEdge(3, 1, 10));
 
 console.log(myGraph.traverseBFS(1));
 console.log(myGraph.dfsForGraphs(1));
+*/
+console.log(myGraph.addNode(1));
+console.log(myGraph.addNode(2));
+console.log(myGraph.addEdge(1, 2));
+console.log(myGraph.addNode(3));
+console.log(myGraph.addNode(4));
+console.log(myGraph.addEdge(3, 4));
+console.log(myGraph.addEdge(2, 3));
+console.log(myGraph.addEdge(1, 4));
+// console.log(myGraph.removeVertex(1));
+console.log(myGraph.removeEdge(1, 4));
+
+// Online Javascript Editor for free
+// Write, Edit and Run your Javascript code using JS Online Compiler
+
+console.log("Try programiz.pro");
+
+class Graph {
+  constructor() {
+    this.adjacencyList = new Map();
+  }
+
+  addVertex(vertex) {
+    if (!this.adjacencyList.has(vertex)) {
+      this.adjacencyList.set(vertex, []);
+    } else {
+      return "Vertex is already present";
+    }
+    return this.adjacencyList;
+  }
+
+  addEdge(vertex1, vertex2) {
+    if (!this.adjacencyList.has(vertex1) || !this.adjacencyList.has(vertex2)) {
+      return "Vertex is not present";
+    }
+
+    const source = this.adjacencyList.get(vertex1);
+    const dest = this.adjacencyList.get(vertex2);
+
+    source.push(vertex2);
+    dest.push(vertex1);
+
+    return this.adjacencyList;
+  }
+
+  removeVertex(vertex) {
+    if (!this.adjacencyList.has(vertex)) {
+      return "Vertex is not present";
+    }
+
+    this.adjacencyList.delete(vertex);
+
+    if (this.adjacencyList.size > 0) {
+      for (const [key, value] of this.adjacencyList.entries()) {
+        console.log(value);
+        if (value.includes(vertex)) {
+          this.adjacencyList.set(
+            key,
+            value.filter((neighbour) => neighbour !== vertex)
+          );
+        }
+      }
+    }
+    return this.adjacencyList;
+  }
+
+  removeEdge(vertex1, vertex2) {
+    if (!this.adjacencyList.has(vertex1) || !this.adjacencyList.has(vertex2)) {
+      return "Vertex is not present";
+    }
+
+    const source = this.adjacencyList.get(vertex1);
+    const dest = this.adjacencyList.get(vertex2);
+
+    if (source.includes(vertex2)) {
+      this.adjacencyList.set(
+        vertex1,
+        source.filter((neighbour) => neighbour !== vertex2)
+      );
+    }
+
+    if (dest.includes(vertex1)) {
+      this.adjacencyList.set(
+        vertex2,
+        dest.filter((neighbour) => neighbour !== vertex1)
+      );
+    }
+
+    return this.adjacencyList;
+  }
+
+  bfs(startNode) {
+    const visited = new Set();
+    const queue = [startNode];
+    visited.add(startNode);
+
+    while (queue.length > 0) {
+      const vertex = queue.shift();
+      console.log(vertex);
+
+      this.adjacencyList.get(vertex).forEach((neighbour) => {
+        if (!visited.has(neighbour)) {
+          queue.push(neighbour);
+          visited.add(neighbour);
+        }
+      });
+    }
+  }
+
+  dfs(startNode, visited = new Set()) {
+    visited.add(startNode);
+    console.log(startNode);
+
+    this.adjacencyList.get(startNode).forEach((neighbour) => {
+      if (!visited.has(neighbour)) return this.dfs(neighbour, visited);
+    });
+  }
+}
+
+const graph = new Graph();
+console.log(graph.addVertex(1));
+console.log(graph.addVertex(2));
+console.log(graph.addEdge(1, 2));
+console.log(graph.addVertex(3));
+console.log(graph.addVertex(4));
+console.log(graph.addEdge(3, 4));
+console.log(graph.addEdge(2, 3));
+console.log(graph.addEdge(1, 4));
+// console.log(graph.removeVertex(1));
+// console.log(graph.removeEdge(1, 4));
+
+console.log(graph.bfs(1));
+console.log(graph.dfs(1));
