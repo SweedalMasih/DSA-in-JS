@@ -1,13 +1,15 @@
 var twoSum = function (numbers, target) {
-  const numsMap = new Map();
+  let left = 0;
+  let right = numbers.length - 1;
 
-  for (let i = 0; i < numbers.length; i++) {
-    const complement = target - numbers[i];
-
-    if (numsMap.has(complement)) {
-      return [numsMap.get(complement), i + 1];
+  while (left < right) {
+    let sum = numbers[left] + numbers[right];
+    if (sum === target) {
+      return [left + 1, right + 1];
+    } else if (sum < target) {
+      left++;
+    } else {
+      right--;
     }
-
-    numsMap.set(numbers[i], i + 1);
   }
 };
